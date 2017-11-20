@@ -35,7 +35,7 @@ function showQueries() {
 	Number of people that visit your bar per season: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"><br>
 	Beers liked by Patrons that frequent your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"><br>
 
-	<div id='q1' style="display:none">
+	<div id="q1" style="display:none">
 			<%
 			List<String> list = new ArrayList<String>();
 
@@ -66,7 +66,7 @@ function showQueries() {
 	
 	<div id="q2" style="display:none">
 		<p>hello world</p>
-		<form method="post" action="ownerQ2.jsp">
+		<form method="post" action="barOwnerQueries.jsp">
 			Limit to: <select name="limit" size=1> 
 				<option value="10">10</option>
 				<option value="20">20</option>
@@ -75,8 +75,42 @@ function showQueries() {
 				<option value="100">100</option>
 				
 			</select>  beers
-			<br> <input type="submit" value="submit">
+			<br> <input type="submit" value="Submit" name="submit">
 		</form>
+		
+		<%
+			if(request.getParameter("submit") != null){
+				try {
+					
+				int limit  = Integer.parseInt(request.getParameter("limit"));
+				String bname = request.getParameter("submit");
+				
+				//Get the database connection
+				ApplicationDB db = new ApplicationDB();	
+				Connection con = db.getConnection();	
+				//Create a SQL statement
+				PreparedStatement stmt2 = con.prepareStatement("SELECT sells.beer AS beer, COUNT(*) AS patrons FROM sells s, likes l, frequents f " +
+															  "WHERE l.drinker = f.drinker AND l.beer = s.beer AND f.bar = s.bar AND s.bar =?" +
+															  "GROUP BY s.beer ORDER BY COUNT(*) DESC LIMIT ?");
+				stmt2.setString(1, bname);
+				stmt2.setInt(2, limit);
+				//Run the query against the database.
+				ResultSet result = stmt2.executeQuery();
+				out.print("<table>");
+				out.print("<tr><th>Beer</th> <th>Number of Patrions</th></tr>");
+
+				 while(result.next()){
+					 out.print("<tr><td>" + result.getString("beer") + "</td><td>" + result.getString("patrons") + "</td></tr>");
+				 }
+				 out.print("</table>");
+			//close the connection.
+				con.close();
+	
+			} catch (Exception e) {
+				System.out.println(e.getStackTrace() + "hello world");
+			}
+		}
+		%>
 	
 	</div>
 	</center>
