@@ -9,23 +9,25 @@
 <title>Drinker Info Entry</title>
 </head>
 <body>
-	<center>
-	<p>User page</p>
-	<form method="post" action="drinkerInput.jsp">
-		First Name: <br>
-		<input type="text" name="firstname"><br>
-		Last Name:<br>  
-		<input type="text" name="lastname"><br>
-		Age: <br>
-		<input type="text" name="age"><br>
-		Gender:<br>
-		<select name="gender" size=1>
-			<option value="M">Male</option>
-			<option value="F">Female</option>
-		</select><br>
-		<br><input type="submit" value="Submit">
-		</form>
-	</center>
+	<div id="wrapper">
+		
+		<h3>User page</h3>
+		<form method="post" action="drinkerInput.jsp">
+			First Name: <br>
+			<input type="text" name="firstname"><br>
+			Last Name:<br>  
+			<input type="text" name="lastname"><br>
+			Age: <br>
+			<input type="text" name="age"><br>
+			Gender:<br>
+			<select name="gender" size=1>
+				<option value="M">Male</option>
+				<option value="F">Female</option>
+			</select><br>
+			<br><input type="submit" value="Submit">
+			</form>
+		
+	</div>
 
 </body>
 </html>
