@@ -10,7 +10,7 @@
 	<center>
 	<p>I am a:</p><br>
 	<a href="drinkerPage.jsp">Drinker</a><br>
-	<a href="barOwnerPage.jsp">Bar Owner</a>
+	<a href="barOwnerHome.jsp">Bar Owner</a>
 	</center>
 
 </body>

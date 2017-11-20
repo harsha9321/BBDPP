@@ -11,6 +11,7 @@
 <body>
 	<center>
 	<p>Hello Bar Owner, Select the bar you own:</p><br>
+	<form method="post" action=".jsp">
 	
 	<%
 		List<String> list = new ArrayList<String>();
@@ -29,13 +30,12 @@
 			String str = "SELECT * FROM bars";
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
-
+			
+			
 			out.print("<select name =\"bar\" size=1");
 			 while(result.next()){
-				 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");
-				 
-				
-		}
+				 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
+			}
 		
 
 			//close the connection.
@@ -45,6 +45,9 @@
 			System.out.println(e.getStackTrace());
 		}
 		%>
+		</select><br>
+		<br><input type="submit" value="Submit">
+		</form>
 	</center>
 
 </body>
