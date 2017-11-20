@@ -26,7 +26,7 @@
 			String lname = request.getParameter("lastname");
 			String ageinput = request.getParameter("age");
 			String gender = request.getParameter("gender");
-			System.out.println(gender);
+			//System.out.println(gender);
 			
 			try{
 				int age = Integer.parseInt(ageinput);
@@ -56,7 +56,9 @@
 						insertStament.setInt(2, age);
 						insertStament.setString(3, gender);
 						insertStament.execute();
-						out.print("<center><p>Welcome Drinker, you have been entered to the database.</p></center>");
+						out.print("<center><p>Welcome Drinker, you have been entered to the database.</p><br></center>");
+						Random rand = new Random();
+						out.print("<center><p>Here is your coupon code: " + (rand.nextInt(1000000 + 1) + 100000) + "</p></center>");
 					}
 				}
 				

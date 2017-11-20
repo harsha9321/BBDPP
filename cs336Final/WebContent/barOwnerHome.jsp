@@ -11,33 +11,27 @@
 <body>
 	<center>
 	<p>Hello Bar Owner, Select the bar you own:</p><br>
-	<form method="post" action=".jsp">
+	<form method="post" action="barOwnerQueries.jsp">
 	
 	<%
 		List<String> list = new ArrayList<String>();
 
 		try {
-
 			//Get the database connection
 			ApplicationDB db = new ApplicationDB();	
 			Connection con = db.getConnection();	
 			
 			//Create a SQL statement
 			Statement stmt = con.createStatement();
-			//Get the combobox from the index.jsp
-
-			//Make a SELECT query from the sells table with the price range specified by the 'price' parameter at the index.jsp
 			String str = "SELECT * FROM bars";
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
-			
 			
 			out.print("<select name =\"bar\" size=1");
 			 while(result.next()){
 				 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
 			}
-		
-
+			out.print("</select><br>");
 			//close the connection.
 			con.close();
 
@@ -45,7 +39,7 @@
 			System.out.println(e.getStackTrace());
 		}
 		%>
-		</select><br>
+		
 		<br><input type="submit" value="Submit">
 		</form>
 	</center>
