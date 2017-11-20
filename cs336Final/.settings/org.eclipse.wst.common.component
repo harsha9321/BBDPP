@@ -2,6 +2,7 @@
     <wb-module deploy-name="cs336Final">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/fusioncharts/WebContent"/>
         <property name="context-root" value="cs336Final"/>
         <property name="java-output-path" value="/cs336Final/build/classes"/>
     </wb-module>
