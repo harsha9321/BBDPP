@@ -1,0 +1,63 @@
+@charset "ISO-8859-1";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-image: url("Images/BeerBar.jpg");
+	background-size: cover;
+	background-color: gray;
+}
+
+h1 {
+	margin-right: 3%;
+	text-align: center;
+}
+
+div#wrapper {
+	background-color: #727272;
+	opacity: .8;
+	margin-top: 5%;
+	margin-left: 6%;
+	margin-right: 6%;
+	padding-top: 2%;
+	padding-bottom: 4%;
+}
+
+div#main {
+	margin-top:5%;
+}
+
+div#linkContainer {
+	text-align: center;
+}
+
+a {
+	background-color: black;
+	padding: 10px;
+	color: #fef092;
+	text-decoration: none;
+	font-size: 140%;
+}
+
+a:visited {
+	color: #fef092;
+	text-decoration: none;
+	font-size: 140%;
+}
+
+a:hover {
+	color:#ffc640;
+	text-decoration: none;
+	font-size: 140%;
+}
+
+a#drinker {
+	margin-right: 12%;
+}
+
+a#owner {
+	margin-left: 15%;
+}
