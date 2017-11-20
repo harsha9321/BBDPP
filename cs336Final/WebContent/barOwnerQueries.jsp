@@ -13,6 +13,11 @@ function showQueries() {
         document.getElementById('q1').style.display = 'block';
     }
     else document.getElementById('q1').style.display = 'none';
+    
+    if (document.getElementById('q2button').checked) {
+        document.getElementById('q2').style.display = 'block';
+    }
+    else document.getElementById('q2').style.display = 'none';
 }
 </script>
 
@@ -28,6 +33,7 @@ function showQueries() {
 	<p>What would you like to see:</p><br>
 	
 	Number of people that visit your bar per season: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"><br>
+	Beers liked by Patrons that frequent your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"><br>
 
 	<div id='q1' style="display:none">
 			<%
@@ -56,6 +62,22 @@ function showQueries() {
 				System.out.println(e.getStackTrace());
 			}
 			%>
+	</div>
+	
+	<div id="q2" style="display:none">
+		<p>hello world</p>
+		<form method="post" action="ownerQ2.jsp">
+			Limit to: <select name="limit" size=1> 
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="75">75</option>
+				<option value="100">100</option>
+				
+			</select>  beers
+			<br> <input type="submit" value="submit">
+		</form>
+	
 	</div>
 	</center>
 	
