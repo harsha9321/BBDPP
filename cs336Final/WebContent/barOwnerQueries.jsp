@@ -26,6 +26,7 @@ function showQueries() {
 <body>
 	<% 
 		String barname = request.getParameter("bar");
+		session.setAttribute("bar",barname );
 		out.print("<center><h1>" + barname + "</h1></center>");
 	%>
 	<center>
