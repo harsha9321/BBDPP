@@ -15,9 +15,13 @@ function showQueries() {
     else document.getElementById('q1').style.display = 'none';
     
     if (document.getElementById('q2button').checked) {
-        document.getElementById('q2').style.display = 'block';
+        document.getElementById('something').style.display = 'block';
     }
-    else document.getElementById('q2').style.display = 'none';
+    else document.getElementById('something').style.display = 'none';
+    if(document.getElementByID('submit').checked) {
+    	document.getElementByID('q2').style.display = 'block';
+    }
+    else document.getElementByID('q2').style.display = 'none';
 }
 </script>
 
@@ -26,8 +30,10 @@ function showQueries() {
 <body>
 	<% 
 		String barname = request.getParameter("bar");
-		session.setAttribute("bar",barname );
-		out.print("<center><h1>" + barname + "</h1></center>");
+		if(barname != null){
+			session.setAttribute("bar",barname);
+		}
+		out.print("<center><h1>" + session.getAttribute("bar") + "</h1></center>");
 	%>
 	<center>
 	
@@ -65,8 +71,8 @@ function showQueries() {
 			%>
 	</div>
 	
-	<div id="q2" style="display:none">
-		<p>hello world</p>
+	<div id="something" style="display:none">
+	
 		<form method="post" action="barOwnerQueries.jsp">
 			Limit to: <select name="limit" size=1> 
 				<option value="10">10</option>
@@ -76,27 +82,30 @@ function showQueries() {
 				<option value="100">100</option>
 				
 			</select>  beers
-			<br> <input type="submit" value="Submit" name="submit">
+			<br> <input type="submit" value="Submit" name="submit" id="submit">
 		</form>
-		
+	</div>	
+	<div id="q2" style="display:none">	
 		<%
-			if(request.getParameter("submit") != null){
+			//if(request.getParameter("submit") != null){
 				try {
-					
+					out.println("test1");	
 				int limit  = Integer.parseInt(request.getParameter("limit"));
-				String bname = request.getParameter("submit");
-				
+				out.println("test2");
 				//Get the database connection
 				ApplicationDB db = new ApplicationDB();	
 				Connection con = db.getConnection();	
 				//Create a SQL statement
-				PreparedStatement stmt2 = con.prepareStatement("SELECT sells.beer AS beer, COUNT(*) AS patrons FROM sells s, likes l, frequents f " +
+				PreparedStatement stmt2 = con.prepareStatement("SELECT s.beer AS beer, COUNT(*) AS patrons FROM sells s, likes l, frequents f " +
 															  "WHERE l.drinker = f.drinker AND l.beer = s.beer AND f.bar = s.bar AND s.bar =?" +
 															  "GROUP BY s.beer ORDER BY COUNT(*) DESC LIMIT ?");
-				stmt2.setString(1, bname);
+				out.println("test3");
+				stmt2.setString(1, (String)session.getAttribute("bar"));
+				
 				stmt2.setInt(2, limit);
 				//Run the query against the database.
 				ResultSet result = stmt2.executeQuery();
+				out.println("test4");
 				out.print("<table>");
 				out.print("<tr><th>Beer</th> <th>Number of Patrions</th></tr>");
 
@@ -104,13 +113,14 @@ function showQueries() {
 					 out.print("<tr><td>" + result.getString("beer") + "</td><td>" + result.getString("patrons") + "</td></tr>");
 				 }
 				 out.print("</table>");
+				 out.println("test5");
 			//close the connection.
 				con.close();
 	
 			} catch (Exception e) {
 				System.out.println(e.getStackTrace() + "hello world");
 			}
-		}
+		//}
 		%>
 	
 	</div>
