@@ -51,7 +51,7 @@
 								}
 							}
 							if(validName == false){
-								out.print("<center><p>Drinker already Exists in the database Duplicate names are not allowed \n Try again</p></center>");
+								out.print("<center><p><a href='drinkerPage.jsp'>Drinker already Exists in the database Duplicate names are not allowed \n Try again</p></a></center>");
 							}
 							else{
 								//insert into database

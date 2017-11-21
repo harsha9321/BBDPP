@@ -33,11 +33,11 @@
 		
 		<div id="inputForm" style="display:none">
 		<form method="post" action="drinkerInput.jsp">
-			First Name: <br>
+			First Name: <sub><i>(Required)</i></sub> <br>
 			<input class="inp" type="text" name="firstname"><br>
-			Last Name:<br>  
+			Last Name: <sub><i>(Required)</i></sub><br>  
 			<input class="inp" type="text" name="lastname"><br>
-			Age: <br>
+			Age: <sub><i>(Must be over 21)</i></sub><br>
 			<input class="inp" type="text" name="age"><br>
 			Gender:<br>
 			<select name="gender" size=1>

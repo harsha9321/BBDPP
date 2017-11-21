@@ -42,7 +42,7 @@
 				con.close();
 	
 			} catch (SQLException e) {
-				System.out.println(e.getMessage() + "home");
+				out.print("<center><p><a href='barOwnerHome.jsp'> There was an internal error with the data base try again</a></p></center>");
 			}
 			%>
 			
