@@ -4,15 +4,33 @@
 	margin: 0;
 	padding: 0;
 }
-	<a id="home" href="main.jsp"> <img src="CSS/Images/Home.png" width="40" height="40"></a>
+
 #home {
 	margin-right: 95%;
 	text-decoration:none;
-	color: white;
 	font-size:18px;
 }
 #home a:visited {
 	color:white;
+}
+#form {
+	color: white;
+}
+
+#notForm {
+	padding-bottom: 10px;
+}
+#notForm a {
+	
+}
+#notForm a:visited {
+	
+}
+a #lookUp:hover {
+	color: #e67300;
+}
+#lookUp:visited {
+	color: white;
 }
 
 body {
