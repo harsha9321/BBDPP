@@ -8,8 +8,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Graph Test</title>
 		
-		<script type="text/javascript" src="C:/Users/Patrick_2/workspace_BID/cs336Final/fusioncharts/fusioncharts.js"></script>
-		<script type="text/javascript" src="C:/Users/Patrick_2/workspace_BID/cs336Final/fusioncharts/fusioncharts.theme.ocean.js"></script>
+		<script type="text/javascript" src="fusioncharts/js/fusioncharts.js"></script>
+		<script type="text/javascript" src="fusioncharts/js/themes/fusioncharts.theme.ocean.js"></script>
 		
 		<script type="text/javascript">
 		FusionCharts.ready(function(){

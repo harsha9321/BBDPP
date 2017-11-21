@@ -24,8 +24,10 @@
 		
 		<h3>User page</h3>
 		<hr>
-		<a onclick="showQueries()" id="form">Become a part of our Database</a>
-		<a href="drinkerQueries.jsp">Look up bars</a>
+		<div id="notForm">
+			<a onclick="showQueries()" id="form">Become a part of our Database</a>
+			<a href="drinkerQueries.jsp" id="lookUp">(Look up bars)</a>
+		</div>
 		
 		<div id="inputForm" style="display:none">
 		<form method="post" action="drinkerInput.jsp">

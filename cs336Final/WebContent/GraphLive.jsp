@@ -11,89 +11,62 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Graph Test</title>
-		<!-- 
-			<script type="text/javascript" src="C:/Users/Patrick_2/workspace_BID/cs336Final/fusioncharts/fusioncharts.js"></script>
-		-->
-		<script type="text/javascript" src="fusioncharts/js/fusioncharts.js"></script>
-		<script type="text/javascript" src="C:/Users/Patrick_2/workspace_BID/cs336Final/fusioncharts/fusioncharts.theme.ocean.js"></script>			
-	
-		<script type="text/javascript" src="C:/Users/Patrick_2/workspace_BID/cs336Final/fusioncharts/fusioncharts.js"></script>
-		<script src="fusioncharts.js"></script>
+		
+		<script type="text/javascript">
+		
+			<?php 
+				/* Open connection to "zing_db" MySQL database. */
+				$mysqli = new mysqli("jdbc:mysql://bar-beer-drinker-plus.cix4c2nzx8tc.us-east-2.rds.amazonaws.com:3306", "cs336", "password", "BarBeerDrinkersPlusPlus");
+				 
+				/* Check the connection. */
+				if (mysqli_connect_errno()) {
+				    printf("Connect failed: %s\n", mysqli_connect_error());
+				    exit();
+				}		
+			
+			var myData=[<?php 
+			while($info=mysqli_fetch_array($data))
+			    echo $info['f_data'].','; \ ?>];
+			
+			$data=mysqli_query($mysqli,"select age, count(*) as count from drinkers group by age asc");
+			?>
+			var myLabels=[<?php 
+			while($info=mysqli_fetch_array($data))
+			    echo '"'.$info['f_name'].'",'; ?>];
+			
+			
+				$mysqli->close(); 
+			?>
+			
+			
+			
+			window.onload=function(){
+			zingchart.render({
+			    id:"myChart",
+			    width:"100%",
+			    height:400,
+			    data:{
+			    "type":"bar",
+			    "title":{
+			        "text":"Drinker Ages"
+			    },
+			    "scale-x":{
+			        "labels":myLabels
+			    },
+			    "series":[
+			        {
+			            "values":myData
+			        }
+			]
+			}
+			});
+			};
+			
+			
+		</script>
 	
 	</head>
 	<body>
-		<div id="chart"></div>
-		
-		<%
-			String hostdb = "jdbc:mysql://bar-beer-drinker-plus.cix4c2nzx8tc.us-east-2.rds.amazonaws.com:3306/BarBeerDrinkersPlusPlus";  // MySQl host
-			String userdb = "cs336";  // MySQL username
-			String passdb = "password";  // MySQL password
-			String namedb = "BarBeerDrinkersPlusPlus";  // MySQL database name
-			
-			// Establish a connection to the database
-		    DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-		    Connection con = DriverManager.getConnection("jdbc:mysql://" + hostdb + "/" + namedb , userdb , passdb);
-		%>
-		
-		<%
-			Gson gson = new Gson();
-			        
-	        
-	        // Form the SQL query that returns the top 10 most populous countries
-	        String sql="select age, count(*) as count from drinkers group by age asc";
-	
-	        // Execute the query.
-	        PreparedStatement pt=con.prepareStatement(sql);    
-	        ResultSet rs=pt.executeQuery();
-	        
-	        Map<String, String> chartobj = new HashMap<String, String>();
-	        
-	        chartobj.put("caption" , "All ages that Frequent the Bars");
-	        chartobj.put("paletteColors" , "#0075c2");
-	        chartobj.put("bgColor" , "#ffffff");
-	        chartobj.put("borderAlpha", "20");
-	        chartobj.put("canvasBorderAlpha", "0");
-	        chartobj.put("usePlotGradientColor", "0");
-	        chartobj.put("plotBorderAlpha", "10");
-	        chartobj.put("showXAxisLine", "1");
-	        chartobj.put("xAxisLineColor" , "#999999");
-	        chartobj.put("showValues" , "1");
-	        chartobj.put("divlineColor" , "#999999");
-	        chartobj.put("divLineIsDashed" , "1");
-	        chartobj.put("showAlternateHGridColor" , "0");
-	        
-	     // Push the data into the array using map object.
-	        ArrayList arrData = new ArrayList();
-	        while(rs.next())
-	        {
-	            Map<String, String> lv = new HashMap<String, String>();
-	            lv.put("label", rs.getString("Ages"));
-	            lv.put("value", rs.getString("Count"));
-	            arrData.add(lv);             
-	        }
-	        
-	        //close the connection.
-	        rs.close();
-
-	        //create 'dataMap' map object to make a complete FC datasource.
-	        
-	         Map<String, String> dataMap = new LinkedHashMap<String, String>();  
-	    /*
-	        gson.toJson() the data to retrieve the string containing the
-	        JSON representation of the data in the array.
-	    */
-	         dataMap.put("chart", gson.toJson(chartobj));
-	         dataMap.put("data", gson.toJson(arrData));
-	         
-	         FusionCharts column2DChart= new FusionCharts(
-	                    "column2d",// chartType
-	                    "chart1",// chartId
-	                    "600","400",// chartWidth, chartHeight
-	                    "chart",// chartContainer
-	                    "json",// dataFormat
-	                    gson.toJson(dataMap) //dataSource
-	                );
-		%>
-		
+		<div id="myChart"></div>		
 	</body>
 </html>
