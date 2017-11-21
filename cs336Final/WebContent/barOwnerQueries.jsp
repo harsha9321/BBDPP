@@ -15,13 +15,10 @@ function showQueries() {
     else document.getElementById('q1').style.display = 'none';
     
     if (document.getElementById('q2button').checked) {
-        document.getElementById('something').style.display = 'block';
+        document.getElementById('q2').style.display = 'block';
     }
-    else document.getElementById('something').style.display = 'none';
-    if(document.getElementByID('submit').checked) {
-    	document.getElementByID('q2').style.display = 'block';
-    }
-    else document.getElementByID('q2').style.display = 'none';
+    else document.getElementById('q2').style.display = 'none';
+
 }
 </script>
 
@@ -71,9 +68,9 @@ function showQueries() {
 			%>
 	</div>
 	
-	<div id="something" style="display:none">
+	<div id="q2" style="display:none">
 	
-		<form method="post" action="barOwnerQueries.jsp">
+		<form method="post" action="ownerQ2.jsp">
 			Limit to: <select name="limit" size=1> 
 				<option value="10">10</option>
 				<option value="20">20</option>
@@ -84,14 +81,12 @@ function showQueries() {
 			</select>  beers
 			<br> <input type="submit" value="Submit" name="submit" id="submit">
 		</form>
-	</div>	
-	<div id="q2" style="display:none">	
+	
 		<%
 			//if(request.getParameter("submit") != null){
-				try {
-					out.println("test1");	
+				try {	
 				int limit  = Integer.parseInt(request.getParameter("limit"));
-				out.println("test2");
+
 				//Get the database connection
 				ApplicationDB db = new ApplicationDB();	
 				Connection con = db.getConnection();	
@@ -99,13 +94,12 @@ function showQueries() {
 				PreparedStatement stmt2 = con.prepareStatement("SELECT s.beer AS beer, COUNT(*) AS patrons FROM sells s, likes l, frequents f " +
 															  "WHERE l.drinker = f.drinker AND l.beer = s.beer AND f.bar = s.bar AND s.bar =?" +
 															  "GROUP BY s.beer ORDER BY COUNT(*) DESC LIMIT ?");
-				out.println("test3");
 				stmt2.setString(1, (String)session.getAttribute("bar"));
 				
 				stmt2.setInt(2, limit);
 				//Run the query against the database.
 				ResultSet result = stmt2.executeQuery();
-				out.println("test4");
+
 				out.print("<table>");
 				out.print("<tr><th>Beer</th> <th>Number of Patrions</th></tr>");
 
@@ -113,12 +107,11 @@ function showQueries() {
 					 out.print("<tr><td>" + result.getString("beer") + "</td><td>" + result.getString("patrons") + "</td></tr>");
 				 }
 				 out.print("</table>");
-				 out.println("test5");
 			//close the connection.
 				con.close();
 	
 			} catch (Exception e) {
-				System.out.println(e.getStackTrace() + "hello world");
+				System.out.println(e.getStackTrace());
 			}
 		//}
 		%>

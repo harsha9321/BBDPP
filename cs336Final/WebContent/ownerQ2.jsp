@@ -13,34 +13,28 @@
 	
 	<%
 				try {
-				out.println("test1");
 				int limit  = Integer.parseInt(request.getParameter("limit"));
-				out.println("test2");
 				//Get the database connection
 				ApplicationDB db = new ApplicationDB();	
 				Connection con = db.getConnection();	
 				//Create a SQL statement
-				out.println("test3");
 				PreparedStatement stmt2 = con.prepareStatement("SELECT s.beer AS beer, COUNT(*) AS patrons FROM sells s, likes l, frequents f " +
 															  "WHERE l.drinker = f.drinker AND l.beer = s.beer AND f.bar = s.bar AND s.bar =?" +
 															  "GROUP BY s.beer ORDER BY COUNT(*) DESC LIMIT ?");
-				out.println("test4");
 				stmt2.setString(1, (String)session.getAttribute("bar"));
 				stmt2.setInt(2, limit);
-				out.println("test5");
 				//Run the query against the database.
 				try{
 					ResultSet result = stmt2.executeQuery();
-					out.print("<table>");
-					out.print("<tr><th>Beer</th> <th>Number of Patrions</th></tr>");
-					out.println("test6");
+					out.print("<center><table>");
+					out.print("<center><tr><th>Beer</th> <th>Number of Patrions</th></tr></center>");
 					 while(result.next()){
-						 out.print("<tr><td>" + result.getString("beer") + "</td><td>" + result.getString("patrons") + "</td></tr>");
+						 out.print("<center><tr><td>" + result.getString("beer") + "</td>" +
+						 			"<td aligin=\"center\">" + result.getString("patrons") + "</td></tr></center>");
 					 }
-					 out.print("</table>");
+					 out.print("</table></center>");
 				//close the connection.
 					con.close();
-					out.println("test7");
 				}catch(SQLException e){
 					out.print(e.getMessage());
 				}
