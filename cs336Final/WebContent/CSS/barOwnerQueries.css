@@ -1,0 +1,91 @@
+@charset "ISO-8859-1";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-image: url("Images/BarOutside.jpg");
+}
+
+.Queries {
+	background-color: gray;
+	opacity: .9;
+	color: white;
+	width: 50%;
+	padding: 1%;
+	padding-top: 1.5%;
+}
+
+.Queries {
+	margin-bottom: 2px;
+}
+
+.table {
+	
+}
+
+table {
+	border-collapse: collapse;
+    width: 50%;
+    margin-top: .3%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){
+	background-color: #f2f2f2;
+}
+
+tr:nth-child(odd){
+	background-color: white;
+}
+
+th {
+    background-color: #e67300;
+    color: white;
+}
+
+.butt {
+	background-color: #e67300;
+	border: none;
+    color: white;
+    padding: 1%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 1%;
+}
+
+.butt:visited {
+	color: white;
+}
+
+.butt:hover {
+	color: black;
+}
+
+#subButt {
+	background-color: #e67300;
+	border: none;
+    color: white;
+    padding: 1%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 1%;
+}
+
+#subButt:visited {
+	color: white;
+}
+
+#subButt:hover {
+	color: black;
+}
