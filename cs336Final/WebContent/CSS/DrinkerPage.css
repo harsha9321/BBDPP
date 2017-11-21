@@ -11,23 +11,33 @@
 	font-size:18px;
 }
 #home a:visited {
-	color:white;
+	color: white;
 }
 #form {
 	color: white;
+}
+#form:hover {
+	
 }
 
 #notForm {
 	padding-bottom: 10px;
 }
 #notForm a {
-	
+	background-color: #e67300;
+	padding: 5px;
+	text-decoration: none;
 }
 #notForm a:visited {
 	
 }
-a #lookUp:hover {
-	color: #e67300;
+
+#notForm a:hover {
+	color: #000000;
+}
+
+#lookUp:hover {
+	color:#e67300;
 }
 #lookUp:visited {
 	color: white;
