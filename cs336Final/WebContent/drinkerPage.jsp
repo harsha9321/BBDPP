@@ -20,9 +20,11 @@
 </script>
 </head>
 <body>
+	<a id="home" href="main.jsp">HOME</a>
+
 	<div id="wrapper">
 		
-		<h3>User page</h3>
+		<h3>User Page</h3>
 		<hr>
 		<div id="notForm">
 			<a onclick="showQueries()" id="form">Become a part of our Database</a>
