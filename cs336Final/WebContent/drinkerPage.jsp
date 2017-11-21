@@ -10,12 +10,24 @@
 	<title>Drinker Info Entry</title>
 	
 	<link href="CSS/DrinkerPage.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">	
+	function showQueries() {
+    if (document.getElementById('form').onclick) {
+        document.getElementById('inputForm').style.display = 'block';
+    }
+    else document.getElementById('q1').style.display = 'none';
+}
+</script>
 </head>
 <body>
 	<div id="wrapper">
 		
 		<h3>User page</h3>
 		<hr>
+		<a onclick="showQueries()" id="form">Become a part of our Database</a>
+		<a href="drinkerQueries.jsp">Look up bars</a>
+		
+		<div id="inputForm" style="display:none">
 		<form method="post" action="drinkerInput.jsp">
 			First Name: <br>
 			<input class="inp" type="text" name="firstname"><br>
@@ -30,7 +42,7 @@
 			</select><br>
 			<br><input id= "butt" type="submit" value="Submit">
 			</form>
-		
+		</div>
 	</div>
 
 </body>
