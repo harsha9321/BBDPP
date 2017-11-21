@@ -6,5 +6,56 @@
 }
 
 body {
+	background-image: url("Images/BarStools.jpg");
+}
+
+#home {
+	text-decoration: none;
+	color: #fef092;
+	background-color:gray;
+	opacity: .95;
+	padding: 5px;
 	
+}
+
+#home:hover {
+	color: #ffc640;
+}
+
+#home:visited {
+	color: #fef092;
+}
+
+div {
+	color: white;
+	padding-left: 30%;
+	padding-right: 30%;
+}
+
+#Hello {
+	background-color: gray;
+	color: white;
+	opacity: .95;
+	
+	padding-top:2%;
+	padding-bottom:2%;
+	margin-top: 21%;
+}
+
+#form {
+	opacity: .95;
+	background-color: gray;
+	padding: 2%;
+}
+
+#butt {
+	background-color: orange;
+	color: white;
+	border: none;
+	padding: 3px;
+	font-size: 16px;
+}
+
+#butt:hover {
+	color: black;
 }

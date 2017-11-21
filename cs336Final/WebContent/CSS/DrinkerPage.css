@@ -6,13 +6,21 @@
 }
 
 #home {
-	margin-right: 95%;
-	text-decoration:none;
-	font-size:18px;
+	text-decoration: none;
+	color: #fef092;
+	background-color:gray;
+	opacity: .95;
+	padding: 5px;
 }
-#home a:visited {
-	color: white;
+
+#home:hover {
+	color: #ffc640;
 }
+
+#home:visited {
+	color: #fef092;
+}
+
 #form {
 	color: white;
 }
@@ -44,7 +52,6 @@
 }
 
 body {
-	text-align: center;
 	background-image: url("Images/PumpkinBeer.jpg");
 	background-size: cover;
 	background-color: white;
@@ -59,6 +66,7 @@ hr {
 }
 
 div#wrapper {
+	text-align: center;
 	background-color: #72718e;
 	opacity: .95;
 	margin-top:10%;
@@ -83,4 +91,7 @@ div#wrapper {
     display: inline-block;
     font-size: 16px;
     margin-bottom:3%;
+}
+#butt:hover {
+	color: black;
 }
