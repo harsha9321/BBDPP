@@ -1,0 +1,46 @@
+@charset "ISO-8859-1";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	
+}
+
+#home {
+	text-decoration: none;
+	color: #fef092;
+	background-color:gray;
+	opacity: .95;
+	padding: 5px;
+}
+
+#home:hover {
+	color: #ffc640;
+}
+
+#home:visited {
+	color: #fef092;
+}
+
+table {
+	border-collapse: collapse;
+    width: 100%;
+    margin-top: .3%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){
+	background-color: #f2f2f2
+}
+
+th {
+    background-color: #e67300;
+    color: white;
+}

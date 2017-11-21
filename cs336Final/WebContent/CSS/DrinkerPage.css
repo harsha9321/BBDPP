@@ -66,7 +66,7 @@ hr {
 }
 
 div#wrapper {
-	text-align: center;
+	text-align: center; 	
 	background-color: #72718e;
 	opacity: .95;
 	margin-top:10%;
