@@ -5,12 +5,31 @@
 	padding: 0;
 }
 
+#home {
+	text-decoration: none;
+	color: #fef092;
+	background-color:gray;
+	opacity: .95;
+	padding: 5px;
+}
+
+#home:hover {
+	color: #ffc640;
+}
+
+#home:visited {
+	color: #fef092;
+}
+
 body {
+	background-image: url("Images/SadBeer.jpg");
+	background-color: #f29d00;
+}
+
+body #wrapper {
 	padding: 20%;
 	padding-left: 30%;
 	padding-right: 30%;
-	background-image: url("Images/SadBeer.jpg");
-	background-color: #f29d00;
 }
 
 p {
