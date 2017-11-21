@@ -9,7 +9,5 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Patrick_2/workspace_BID/cs336Final/jsp-wrapper-master/includeJarFiles/gson-2.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Patrick_2/workspace_BID/cs336Final/jsp-wrapper-master/includeJarFiles/mysql-connector.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
