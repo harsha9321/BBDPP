@@ -5,38 +5,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-<script type="text/javascript">
-function showQueries() {
-	if (document.getElementById('showOptions').onclick) {
-        document.getElementById('options').style.display = 'block';
-    }
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	
-    if (document.getElementById('q1button').checked) {
-        document.getElementById('q1').style.display = 'block';
-    }
-    else document.getElementById('q1').style.display = 'none';
-    
-    if (document.getElementById('q3button').checked) {
-        document.getElementById('q3').style.display = 'block';
-    }
-    else document.getElementById('q3').style.display = 'none';
-    
-    if (document.getElementById('q4button').checked) {
-        document.getElementById('q4').style.display = 'block';
-    }
-    else document.getElementById('q4').style.display = 'none';
-    
-    if (document.getElementById('q2button').checked) {
-        document.getElementById('q2').style.display = 'block';
-    }
-    else document.getElementById('q2').style.display = 'none';
-
-}
-</script>
-
-<title>Bar Owner Queries</title>
+	<script type="text/javascript">
+	function showQueries() {
+		if (document.getElementById('showOptions').onclick) {
+	        document.getElementById('options').style.display = 'block';
+	    }
+		
+	    if (document.getElementById('q1button').checked) {
+	        document.getElementById('q1').style.display = 'block';
+	    }
+	    else document.getElementById('q1').style.display = 'none';
+	    
+	    if (document.getElementById('q3button').checked) {
+	        document.getElementById('q3').style.display = 'block';
+	    }
+	    else document.getElementById('q3').style.display = 'none';
+	    
+	    if (document.getElementById('q4button').checked) {
+	        document.getElementById('q4').style.display = 'block';
+	    }
+	    else document.getElementById('q4').style.display = 'none';
+	    
+	    if (document.getElementById('q2button').checked) {
+	        document.getElementById('q2').style.display = 'block';
+	    }
+	    else document.getElementById('q2').style.display = 'none';
+	
+	}
+	</script>
+	
+	<title>Bar Owner Queries</title>
+	
+	<link href="CSS/barOwnerQueries.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<% 
@@ -49,17 +51,17 @@ function showQueries() {
 	<center>
 	
 	<h3>What would you like to see:</h3><br>
-	<a onclick="showQueries()" id="showOptions">Run Queries</a>
-	<a href="ownerUpdates.jsp">Update your bar</a>
-	
-	<div id="options" style="display:none">
-		Number of people that have visited your bar by season: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"><br>
-		Age range of the patrons that frequent your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q3button"><br>
-		Age range of the patrons that have visited your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q4button"><br>
-		Beers liked by Patrons that frequent your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"><br>	
+	<div class="Queries">
+		<a onclick="showQueries()" class="butt" id="showOptions">Run Queries</a>
+		<a href="ownerUpdates.jsp" class="butt">Update your bar</a>
+		
+		<div id="options" style="display:none">
+			<p> Number of people that have visited your bar by season: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"> </p>
+			<p> Age range of the patrons that frequent your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q3button"></p>
+			<p> Age range of the patrons that have visited your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q4button"></p>
+			<p> Beers liked by Patrons that frequent your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"></p>	
+		</div>
 	</div>
-	
-
 	<div id="q1" style="display:none">
 			<%
 			//List<String> list = new ArrayList<String>();
@@ -73,7 +75,7 @@ function showQueries() {
 				stmt.setString(1, (String)session.getAttribute("bar"));
 				//Run the query against the database.
 				ResultSet result = stmt.executeQuery();
-				out.print("<table>");
+				out.print("<table class='table'>");
 				out.print("<tr><th>Season</th> <th>Patrons</th></tr>");
 
 				 while(result.next()){
@@ -110,7 +112,7 @@ function showQueries() {
 				stmt2.setString(1, (String)session.getAttribute("bar"));
 				//Run the query against the database.
 				ResultSet result = stmt2.executeQuery();
-				out.print("<table>");
+				out.print("<table class='table'>");
 				out.print("<tr><th>AgeRange</th> <th>Patrons</th></tr>");
 
 				 while(result.next()){
@@ -147,7 +149,7 @@ function showQueries() {
 				stmt3.setString(1, (String)session.getAttribute("bar"));
 				//Run the query against the database.
 				ResultSet result = stmt3.executeQuery();
-				out.print("<table>");
+				out.print("<table class='table'>");
 				out.print("<tr><th>AgeRange</th> <th>Patrons</th></tr>");
 
 				 while(result.next()){
@@ -165,7 +167,7 @@ function showQueries() {
 	
 	<div id="q2" style="display:none">
 	
-		<form method="post" action="ownerQ2.jsp">
+		<form class="Queries" method="post" action="ownerQ2.jsp">
 			Limit to: <select name="limit" size=1> 
 				<option value="10">10</option>
 				<option value="20">20</option>
@@ -174,7 +176,7 @@ function showQueries() {
 				<option value="100">100</option>
 				
 			</select>  beers
-			<br> <input type="submit" value="Submit" name="submit" id="submit">
+			<br> <input id="subButt" type="submit" value="Submit" name="submit" id="submit">
 		</form>	
 	</div>
 	</center>
