@@ -20,7 +20,7 @@
 		<form id="form" method="post" action="barOwnerQueries.jsp">
 		
 		<%
-			List<String> list = new ArrayList<String>();
+			//List<String> list = new ArrayList<String>();
 	
 			try {
 				//Get the database connection
@@ -41,8 +41,8 @@
 				//close the connection.
 				con.close();
 	
-			} catch (Exception e) {
-				System.out.println(e.getStackTrace());
+			} catch (SQLException e) {
+				System.out.println(e.getMessage() + "home");
 			}
 			%>
 			

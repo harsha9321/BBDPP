@@ -14,6 +14,11 @@ function showQueries() {
     }
     else document.getElementById('q1').style.display = 'none';
     
+    if (document.getElementById('q3button').checked) {
+        document.getElementById('q3').style.display = 'block';
+    }
+    else document.getElementById('q3').style.display = 'none';
+    
     if (document.getElementById('q2button').checked) {
         document.getElementById('q2').style.display = 'block';
     }
@@ -34,14 +39,15 @@ function showQueries() {
 	%>
 	<center>
 	
-	<p>What would you like to see:</p><br>
+	<h3>What would you like to see:</h3><br>
 	
 	Number of people that visit your bar per season: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"><br>
+	Age range of the patrons that frequent your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q3button"><br>
 	Beers liked by Patrons that frequent your bar: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"><br>
 
 	<div id="q1" style="display:none">
 			<%
-			List<String> list = new ArrayList<String>();
+			//List<String> list = new ArrayList<String>();
 
 			try {
 				//Get the database connection
@@ -49,7 +55,7 @@ function showQueries() {
 				Connection con = db.getConnection();	
 				//Create a SQL statement
 				PreparedStatement stmt = con.prepareStatement("SELECT season, patrons FROM seasonalPatrons WHERE bar =?");
-				stmt.setString(1, barname);
+				stmt.setString(1, (String)session.getAttribute("bar"));
 				//Run the query against the database.
 				ResultSet result = stmt.executeQuery();
 				out.print("<table>");
@@ -63,11 +69,45 @@ function showQueries() {
 				con.close();
 	
 			} catch (Exception e) {
-				System.out.println(e.getStackTrace());
+				System.out.println(e.getStackTrace() + "hello");
 			}
 			%>
 	</div>
 	
+	<div id="q3" style="display:none">
+		<%
+			try {
+				//Get the database connection
+				ApplicationDB db = new ApplicationDB();	
+				Connection con = db.getConnection();	
+				//Create a SQL statement
+				PreparedStatement stmt2 = con.prepareStatement("SELECT ager.AgeRange, COALESCE(TotalWithinRange, 0) AS TotalWithinRange " +
+																"FROM(SELECT \"21 - 30\" AS AgeRange UNION SELECT \"31 - 40\" " +
+																"UNION SELECT \"41 - 50\" UNION SELECT \"51 - 60\" ) ager " +
+																"LEFT JOIN (SELECT CASE WHEN age >= 21 and age <= 30 then \"21 - 30\" " +
+																"WHEN age >= 31 and age <= 40 then \"31 - 40\" " + 
+																"WHEN age >= 41 and age <= 50 then \"41 - 50\" " +
+																"WHEN age >= 51 and age <= 60 then \"51 - 60\" END AS AgeRange, COUNT(*) AS TotalWithinRange " +
+																"FROM (SELECT d.age FROM drinkers d, frequents f WHERE d.name = f.drinker AND f.bar =?) x " +
+																"GROUP BY 1) y ON ager.AgeRange = y.AgeRange;");
+				stmt2.setString(1, (String)session.getAttribute("bar"));
+				//Run the query against the database.
+				ResultSet result = stmt2.executeQuery();
+				out.print("<table>");
+				out.print("<tr><th>AgeRange</th> <th>Patrons</th></tr>");
+
+				 while(result.next()){
+					 out.print("<tr><td>" + result.getString("ager.AgeRange") + "</td><td>" + result.getString("TotalWithinRange") + "</td></tr>");
+				 }
+				 out.print("</table>");
+			//close the connection.
+				con.close();
+	
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			%>
+	</div>
 	<div id="q2" style="display:none">
 	
 		<form method="post" action="ownerQ2.jsp">
@@ -80,42 +120,7 @@ function showQueries() {
 				
 			</select>  beers
 			<br> <input type="submit" value="Submit" name="submit" id="submit">
-		</form>
-	
-		<%
-			//if(request.getParameter("submit") != null){
-				try {	
-				int limit  = Integer.parseInt(request.getParameter("limit"));
-
-				//Get the database connection
-				ApplicationDB db = new ApplicationDB();	
-				Connection con = db.getConnection();	
-				//Create a SQL statement
-				PreparedStatement stmt2 = con.prepareStatement("SELECT s.beer AS beer, COUNT(*) AS patrons FROM sells s, likes l, frequents f " +
-															  "WHERE l.drinker = f.drinker AND l.beer = s.beer AND f.bar = s.bar AND s.bar =?" +
-															  "GROUP BY s.beer ORDER BY COUNT(*) DESC LIMIT ?");
-				stmt2.setString(1, (String)session.getAttribute("bar"));
-				
-				stmt2.setInt(2, limit);
-				//Run the query against the database.
-				ResultSet result = stmt2.executeQuery();
-
-				out.print("<table>");
-				out.print("<tr><th>Beer</th> <th>Number of Patrions</th></tr>");
-
-				 while(result.next()){
-					 out.print("<tr><td>" + result.getString("beer") + "</td><td>" + result.getString("patrons") + "</td></tr>");
-				 }
-				 out.print("</table>");
-			//close the connection.
-				con.close();
-	
-			} catch (Exception e) {
-				System.out.println(e.getStackTrace());
-			}
-		//}
-		%>
-	
+		</form>	
 	</div>
 	</center>
 	
