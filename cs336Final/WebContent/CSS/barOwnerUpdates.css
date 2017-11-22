@@ -5,6 +5,55 @@
 	padding: 0;
 }
 
-bar {
+body {
 	
+	background-image: url("Images/beerDog.jpg");
+	background-size: cover;
+}
+
+#test {
+	margin-bottom: 10%;
+}
+
+.div {
+	background-color: gray;
+	opacity: .9;
+	width: 50%;
+}
+
+#home {
+	text-decoration: none;
+	color: #fef092;
+	background-color:gray;
+	opacity: .95;
+	padding: 5px;
+}
+
+#home:hover {
+	color: #ffc640;
+}
+
+#home:visited {
+	color: #fef092;
+}
+
+.butt {
+	background-color: #e67300;
+	border: none;
+    color: white;
+    padding: 1%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+.butt:visited {
+	color: white;
+}
+
+.butt:hover {
+	color: black;
 }

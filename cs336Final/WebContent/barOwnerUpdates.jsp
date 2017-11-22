@@ -23,21 +23,25 @@
 	}
 	</script>
 	
+	<link href="CSS/barOwnerUpdates.css" rel="stylesheet" type="text/css">	
 </head>
 <body>
+	<a id="home" href="main.jsp">HOME</a>
+	<div id="test"></div>
 	<center>
+	<div class="div">
 		Add a new beer to sell: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"><br>
 		Add a seasonal modifier to prices: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"><br>
-	
-	<div id="q1" style="display:none">		
+	</div>
+	<div class="div" id="q1" style="display:none">		
 		<form method="post" action="newBeer.jsp">
 			New Beer Name: <input type="text" name="beer"><br>
 			Base Price: <input type="text" name="price"><br>
-			<input type="submit" value="submit">
+			<input class="butt" type="submit" value="submit">
 		</form>
 	</div>
 	
-	<div id="q2" style="display:none">
+	<div class="div" id="q2" style="display:none">
 		<form method="post" action="newModifier.jsp">
 			<%
 			//List<String> list = new ArrayList<String>();
@@ -68,7 +72,7 @@
 			}
 			%>
 			Modifier: <input type="text" name="modifier"><br>
-			<input type="submit" value="submit">
+			<input class="butt" type="submit" value="submit">
 		</form>
 
 	</div>
