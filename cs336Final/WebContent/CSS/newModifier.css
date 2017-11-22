@@ -6,20 +6,19 @@
 }
 
 body {
-	padding-left: 25%;
-	padding-right: 25%;
-	
 	background-image: url("Images/BarOutside.jpg");
 }
 
 div {
-	margin-bottom: 20%;
+	margin-bottom: 15%;
 }
 
 center {
 	background-color: gray;
 	color: white;
 	opacity: .9;
+	width: 50%;
+	margin-left: 25%;
 }
 
 #home {
@@ -36,4 +35,28 @@ center {
 
 #home:visited {
 	color: #fef092;
+}
+
+table {
+	border-collapse: collapse;
+    width: 50%;
+    margin-top: .3%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){
+	background-color: #fafafa;
+}
+
+tr:nth-child(odd){
+	background-color: white;
+}
+
+th {
+    background-color: #e67300;
+    color: white;
 }
