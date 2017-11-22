@@ -30,9 +30,7 @@
 		Add a new beer to sell: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"><br>
 		Add a seasonal modifier to prices: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"><br>
 	
-	<div id="q1" style="display:none">
-		hello world
-		
+	<div id="q1" style="display:none">		
 		<form method="post" action="newBeer.jsp">
 			New Beer Name: <input type="text" name="beer"><br>
 			Base Price: <input type="text" name="price"><br>
@@ -41,7 +39,37 @@
 	</div>
 	
 	<div id="q2" style="display:none">
-		die in a fire
+		<form method="post" action="newModifier.jsp">
+			<%
+			//List<String> list = new ArrayList<String>();
+	
+			try {
+				//Get the database connection
+				ApplicationDB db = new ApplicationDB();	
+				Connection con = db.getConnection();	
+				
+				//Create a SQL statement
+				Statement stmt = con.createStatement();
+				String str = "SELECT * FROM seasons";
+				//Run the query against the database.
+				ResultSet result = stmt.executeQuery(str);
+				
+				out.print("Season: <select name =\"season\" size=1 <p>");
+				 while(result.next()){
+					 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
+				}
+				out.print("</select><br>");
+				//close the connection.
+				con.close();
+	
+			} catch (SQLException e) {
+				out.print("<center><p>There was an internal error with the data base try again</p></center>");
+			}
+			%>
+			Modifier: <input type="text" name="modifier"><br>
+			<input type="submit" value="submit">
+		</form>
+
 	</div>
 	
 	
