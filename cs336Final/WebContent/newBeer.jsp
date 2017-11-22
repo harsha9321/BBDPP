@@ -75,6 +75,7 @@
 								}
 							}
 							result2.close();
+							stmt4.close();
 							if(status2 == true){
 								out.print("<center><h2>" + bar + " already sells " + beer +"</h2></center>");
 							} else if(status2 == false){
