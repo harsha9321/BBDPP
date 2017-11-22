@@ -31,7 +31,10 @@
 					String ageinput = request.getParameter("age");
 					String gender = request.getParameter("gender");
 					//System.out.println(gender);
-					
+					if(fname.compareTo("") == 0 || lname.compareTo("")== 0){
+						out.print("<center><p>First and or Last name were left blank</p></center>");
+					}
+					else {
 					try{
 						int age = Integer.parseInt(ageinput);
 						//out.println("<p>ageInt:  " + age + "</p>" );
@@ -78,7 +81,7 @@
 					
 					stmt.close();		
 					con.close();
-		
+					}
 				} catch (Exception e) {
 					System.out.println(e.getStackTrace() + "hello2");
 				}
