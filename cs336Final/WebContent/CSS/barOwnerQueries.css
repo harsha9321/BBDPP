@@ -9,6 +9,14 @@ body {
 	background-image: url("Images/BarOutside.jpg");
 }
 
+#home {
+	text-decoration: none;
+	color: #fef092;
+	background-color:gray;
+	opacity: .95;
+	padding: 5px;
+}
+
 .Queries {
 	background-color: gray;
 	opacity: .94;
