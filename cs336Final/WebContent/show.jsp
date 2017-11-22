@@ -10,70 +10,37 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-	    
-		try {
 	
-			//Get the database connection
-			ApplicationDB db = new ApplicationDB();	
-			Connection con = db.getConnection();		
-
-			//Create a SQL statement
-			Statement stmt = con.createStatement();
-			//Get the selected radio button from the index.jsp
-			String entity = request.getParameter("command");
-			//Make a SELECT query from the table specified by the 'command' parameter at the index.jsp
-			String str = "SELECT * FROM " + entity;
-			//Run the query against the database.
-			ResultSet result = stmt.executeQuery(str);
-			
-			//Make an HTML table to show the results in:
-			out.print("<table>");
-
-			//make a row
-			out.print("<tr>");
-			//make a column
-			out.print("<td>");
-			//print out column header
-			out.print("name");
-			out.print("</td>");
-			//make a column
-			out.print("<td>");
-			//depending on the radio button selection make a column header for Manufacturer if the beers table was selected and Address if the bars table was selected
-			if (entity.equals("beers"))
-				out.print("manf");
-			else
-				out.print("addr");
-			out.print("</td>");
-			out.print("</tr>");
-
-			//parse out the results
-			while (result.next()) {
-				//make a row
-				out.print("<tr>");
-				//make a column
-				out.print("<td>");
-				//Print out current bar or beer name:
-				out.print(result.getString("name"));
-				out.print("</td>");
-				out.print("<td>");
-				//Print out current bar/beer additional info: Manf or Address
-				if (entity.equals("beers"))
-					out.print(result.getString("manf"));
-				else
-					out.print(result.getString("addr"));
-				out.print("</td>");
-				out.print("</tr>");
-
+	<%
+			List<String> list = new ArrayList<String>();
+	
+			try {
+				//Get the database connection
+				ApplicationDB db = new ApplicationDB();	
+				Connection con = db.getConnection();	
+				
+				//Create a SQL statement
+				Statement stmt = con.createStatement();
+				String str = "SELECT * FROM seasons";
+				//Run the query against the database.
+				ResultSet result = stmt.executeQuery(str);
+				while(result.next()){
+					list.add(result.getString("name"));
+				}
+				int i = 0;
+				out.print("Season that I visited the bar: <select name =\"drinker\" size=1");
+				 while(result.next()) {
+					 out.print("<option value=\"" + list.get(i) + "\">" + list.get(i) + "</option>");
+					 i++;
+				}
+				out.print("</select><sub><i>If you dont see the season that you visited, you are on the wrong planet.</i></sub><br>");
+				//close the connection.
+				con.close();
+	
+			} catch (SQLException e) {
+				out.print("<center><p><a href='drinkerQueries.jsp'> There was an internal error with the data base try again</a></p></center>");
 			}
-			out.print("</table>");
-
-			//close the connection.
-			db.closeConnection(con);
-		} catch (Exception e) {
-			out.print(e);
-		}
-	%>
+			%>
 
 </body>
 </html>

@@ -54,7 +54,7 @@ function showQueries() {
 				con.close();
 	
 			} catch (SQLException e) {
-				out.print("<center><p><a href='barOwnerHome.jsp'> There was an internal error with the data base try again</a></p></center>");
+				out.print("<center><p>There was an internal error with the data base try again</p></center>");
 			}
 			%>
 			
@@ -72,5 +72,96 @@ function showQueries() {
 			</form>
 		</center>			
 	</div>
+	
+	<div id="q2" style="display:none">
+		<center>
+		<form id="form" method="post" action="drinkerQ2.jsp">
+		
+		<%
+			//List<String> list = new ArrayList<String>();
+	
+			try {
+				//Get the database connection
+				ApplicationDB db = new ApplicationDB();	
+				Connection con = db.getConnection();	
+				
+				//Create a SQL statement
+				Statement stmt = con.createStatement();
+				String str = "SELECT * FROM drinkers";
+				//Run the query against the database.
+				ResultSet result = stmt.executeQuery(str);
+				
+				out.print("My Name is: <select name =\"drinker\" size=1");
+				 while(result.next()){
+					 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
+				}
+				out.print("</select><sub><i>If you dont see your name go back and join our database</i></sub><br>");
+				//close the connection.
+				con.close();
+	
+			} catch (SQLException e) {
+				out.print("<center><p><a href='drinkerQueries.jsp'> There was an internal error with the data base try again</a></p></center>");
+			}
+			%>
+			
+		<%
+			//List<String> list = new ArrayList<String>();
+	
+			try {
+				//Get the database connection
+				ApplicationDB db = new ApplicationDB();	
+				Connection con = db.getConnection();	
+				
+				//Create a SQL statement
+				Statement stmt = con.createStatement();
+				String str = "SELECT * FROM bars";
+				//Run the query against the database.
+				ResultSet result = stmt.executeQuery(str);
+				
+				out.print("Bar that i visited: <select name =\"drinker\" size=1");
+				 while(result.next()){
+					 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
+				}
+				out.print("</select><sub><i>If you dont see your bar, that means it is not a part of our database</i></sub><br>");
+				//close the connection.
+				con.close();
+	
+			} catch (SQLException e) {
+				out.print("<center><p><a href='drinkerQueries.jsp'> There was an internal error with the data base try again</a></p></center>");
+			}
+			%>
+			
+		<%
+			//List<String> list = new ArrayList<String>();
+	
+			try {
+				//Get the database connection
+				ApplicationDB db = new ApplicationDB();	
+				Connection con = db.getConnection();	
+				
+				//Create a SQL statement
+				Statement stmt = con.createStatement();
+				String str = "SELECT * FROM seasons";
+				//Run the query against the database.
+				ResultSet result = stmt.executeQuery(str);
+				
+				out.print("Season that I visited the bar: <select name =\"drinker\" size=1");
+				 while(result.next()){
+					 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
+				}
+				out.print("</select><sub><i>If you dont see the season that you visited, you are on the wrong planet.</i></sub><br>");
+				//close the connection.
+				con.close();
+	
+			} catch (SQLException e) {
+				out.print("<center><p><a href='drinkerQueries.jsp'> There was an internal error with the data base try again</a></p></center>");
+			}
+			%>
+
+			<br><input type="submit" value="Submit">
+			</form>
+		</center>			
+	</div>
+	
 </body>
 </html>
