@@ -12,10 +12,9 @@
 	<link href="CSS/newBeer.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
-	<a id="home" href="main.jsp">HOME</a>
-
-	<div>.</div>
+	<div>
+		<a id="home" href="main.jsp">HOME</a>
+	</div>
 
 	<%
 		String bar = (String)session.getAttribute("bar");
