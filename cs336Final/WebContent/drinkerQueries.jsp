@@ -5,27 +5,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Drinker Queries</title>
-
-<script type="text/javascript">
-function showQueries() {
-	if (document.getElementById('q1button').checked) {
-        document.getElementById('q1').style.display = 'block';
-    }
-	else document.getElementById('q1').style.display = 'none';
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Drinker Queries</title>
 	
-    if (document.getElementById('q2button').checked) {
-        document.getElementById('q2').style.display = 'block';
-    }
-    else document.getElementById('q2').style.display = 'none';
-}
-</script>
+	<script type="text/javascript">
+	function showQueries() {
+		if (document.getElementById('q1button').checked) {
+	        document.getElementById('q1').style.display = 'block';
+	    }
+		else document.getElementById('q1').style.display = 'none';
+		
+	    if (document.getElementById('q2button').checked) {
+	        document.getElementById('q2').style.display = 'block';
+	    }
+	    else document.getElementById('q2').style.display = 'none';
+	}
+	</script>
+	
+	<link href="CSS/drinkerQueries.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
+
+	<a id="home" href="main.jsp">HOME</a>
+
 	<center>
-	Search for a bar that sell specific beers: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"><br>
-	Let us know what bar you have visited: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"><br>
+	<div id="blockOne">
+		<p>Search for a bar that sell specific beers: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"></p>
+		<p>Let us know what bar you have visited: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"></p>
+	</div>
 	</center>
 	<div id="q1" style="display:none">
 		<center>
@@ -45,7 +53,7 @@ function showQueries() {
 				//Run the query against the database.
 				ResultSet result = stmt.executeQuery(str);
 				
-				out.print("Bars that sell: <select name =\"beer\" size=1");
+				out.print("<p class='blockTwo'> Bars that sell: <select name =\"beer\" size=1 <p>");
 				 while(result.next()){
 					 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
 				}
@@ -68,7 +76,7 @@ function showQueries() {
 				
 			</select>  bars
 			
-			<br><input type="submit" value="Submit">
+			<br><input class="butt" type="submit" value="Submit">
 			</form>
 		</center>			
 	</div>
@@ -91,11 +99,11 @@ function showQueries() {
 				//Run the query against the database.
 				ResultSet result = stmt.executeQuery(str);
 				
-				out.print("My Name is: <select name =\"drinker\" size=1");
+				out.print("<p class='blockTwo'>My Name is: <select name =\"drinker\" size=1 </p>");
 				 while(result.next()){
 					 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
 				}
-				out.print("</select><sub><i>If you dont see your name go back and join our database</i></sub><br>");
+				out.print("</select><sub><i>&nbsp&nbspIf you dont see your name go back and join our database</i></sub><br>");
 				//close the connection.
 				con.close();
 	
@@ -122,7 +130,7 @@ function showQueries() {
 				 while(result.next()){
 					 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
 				}
-				out.print("</select><sub><i>If you dont see your bar, that means it is not a part of our database</i></sub><br>");
+				out.print("</select><sub><i>&nbsp&nbspIf you dont see your bar, that means it is not a part of our database</i></sub><br>");
 				//close the connection.
 				con.close();
 	
@@ -150,7 +158,7 @@ function showQueries() {
 				 while(result.next()){
 					 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
 				}
-				out.print("</select><sub><i>If you dont see the season that you visited, you are on the wrong planet.</i></sub><br>");
+				out.print("</select><sub><i>&nbsp&nbspIf you dont see the season that you visited, you are on the wrong planet.</i></sub><br>");
 				//close the connection.
 				con.close();
 	
@@ -159,7 +167,7 @@ function showQueries() {
 			}
 			%>
 
-			<br><input type="submit" value="Submit">
+			<br><input class="butt" type="submit" value="Submit">
 			</form>
 		</center>			
 	</div>

@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	padding-top: 15%;
+	background-image: url("Images/Obama.jpg");
+}
+
+a {
+	background-color: gray;
+	text-decoration: none;
+	color: white;
+	padding: 1%;
+}
+
+a:visited {
+	color: white;
+}
+
+a:hover {
+	color: #ffc640;
+}
