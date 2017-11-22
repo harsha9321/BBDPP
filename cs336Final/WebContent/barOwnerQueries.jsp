@@ -42,6 +42,8 @@
 </head>
 <body>
 	
+	<a id="home" href="main.jsp">HOME</a>
+	
 	<% 
 		String barname = request.getParameter("bar");
 		if(barname != null){

@@ -29,7 +29,7 @@
 				try{
 					ResultSet result = stmt2.executeQuery();
 					out.print("<center><table>");
-					out.print("<center><tr><th>Beer</th> <th>Number of Patrions</th></tr></center>");
+					out.print("<center><tr><th>Beer</th> <th>Number of Patrons</th></tr></center>");
 					 while(result.next()){
 						 out.print("<center><tr><td align=\"center\">" + result.getString("beer") + "</td>" +
 						 			"<td align=\"center\">" + result.getString("patrons") + "</td></tr></center>");
