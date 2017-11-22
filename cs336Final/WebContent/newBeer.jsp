@@ -10,113 +10,105 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<%
-	try {
-
-		//Get the database connection
-		ApplicationDB db = new ApplicationDB();	
-		Connection con = db.getConnection();
-
-		//Create a SQL statement
-		Statement stmt = con.createStatement();
-
-		//Populate SQL statement with an actual query. It returns a single number. The number of beers in the DB.
-		String str = "SELECT COUNT(*) as cnt FROM beers";
-
-		//Run the query against the DB
-		ResultSet result = stmt.executeQuery(str);
-
-		//Start parsing out the result of the query. Don't forget this statement. It opens up the result set.
-		result.next();
-		//Parse out the result of the query
-		int countBeers = result.getInt("cnt");
-
-		//Populate SQL statement with an actual query. It returns a single number. The number of beers in the DB.
-		str = "SELECT COUNT(*) as cnt FROM bars";
-		//Run the query against the DB
-		result = stmt.executeQuery(str);
-		//Start parsing out the result of the query. Don't forget this statement. It opens up the result set.
-		result.next();
-		//Parse out the result of the query
-		int countBars = result.getInt("cnt");
-
-		//Get parameters from the HTML form at the HelloWorld.jsp
-		String newBar = request.getParameter("bar");
-		String newBeer = request.getParameter("beer");
-		float price = Float.valueOf(request.getParameter("price"));
-
-
-		//Make an insert statement for the Sells table:
-		String insert = "INSERT INTO sells(bar, beer, price)"
-				+ "VALUES (?, ?, ?)";
-		//Create a Prepared SQL statement allowing you to introduce the parameters of the query
-		PreparedStatement ps = con.prepareStatement(insert);
-
-		//Add parameters of the query. Start with 1, the 0-parameter is the INSERT statement itself
-		ps.setString(1, newBar);
-		ps.setString(2, newBeer);
-		ps.setFloat(3, price);
-		//Run the query against the DB
-		ps.executeUpdate();
-
-		//Check counts once again (the same as the above)
-		str = "SELECT COUNT(*) as cnt FROM beers";
-		result = stmt.executeQuery(str);
-		result.next();
-		System.out.println("Here I am!");
-		int countBeersN = result.getInt("cnt");
-		System.out.println(countBeersN);
-		str = "SELECT COUNT(*) as cnt FROM bars";
-		result = stmt.executeQuery(str);
-		result.next();
-		int countBarsN = result.getInt("cnt");
-
-		//Close the connection. Don't forget to do it, otherwise you're keeping the resources of the server allocated.
-		con.close();
-
-		//Compare counts of the beers and bars before INSERT on Sells and after to figure out whether there is a bar and a beer stub records inserted by a trigger. 
-		int updateBeer = (countBeers != countBeersN) ? 1 : 0;
-		int updateBar = (countBars != countBarsN) ? 1 : 0;
-		;
-		System.out.println(updateBeer + "   " + updateBar);
-		if (updateBeer > 0) {
-			//Create a dynamic HTML form for beer update if needed. The form is not going to show up if the beer specified at index.jsp already exists in the database.
-			out.print("Beer " + newBeer + " details: <br>");
-			out.print("<form method=\"post\" action=\"newBeerDetails.jsp\">"
-					+ "<table> <tr>	<td>Manf</td><td><input type=\"text\" name=\"manufacturer\"></td>   	</tr>"
-					+ "</table> <br>");
+		String bar = (String)session.getAttribute("bar");
+		String beer = request.getParameter("beer");
+		if(beer.compareTo("") == 0){
+			out.print("<center><h2>Beer name cannot be blank.</h2></center>");
 		}
+		else{
+			try{
+				double baseprice = Double.parseDouble(request.getParameter("price"));
+				baseprice = Math.floor(baseprice * 100) / 100;
+				
+				if(baseprice < 0){
+					out.print("<center><h2>Price need to be greater then 0</h2></center>");
+				}
+				else{
+					try{
+						//Get the database connection
+						ApplicationDB db = new ApplicationDB();	
+						Connection con = db.getConnection();
+						Connection con2 = db.getConnection();
 
-		if (updateBar > 0) {
-			//Create a dynamic HTML form for bar update if needed. The form is not going to show up if the bar  specified at HelloWorld.jsp already exists in the database..
-			//The form goes inside the HTML table too make alignment of the elements prettier.
-			//See show.jsp for clear notation of the HTML table and HelloWorld.jsp for clear notation of the HTML form
-			out.print("Bar " + newBar + " details: <br>");
-			out.print("<table> <tr>	<td>Address</td><td><input type=\"text\" name=\"addr\"></td>   	</tr>"
-					+ " 	<tr>  	<td>License</td><td><input type=\"text\" name=\"license\"></td> 	</tr>"
-					+ "	<tr>  	<td>City</td><td><input type=\"text\" name=\"city\"></td> 	</tr>"
-					+ "	<tr>  	<td>Phone</td><td><input type=\"text\" name=\"phone\"></td> 	</tr>"
-					+ "</table> <br> <input type=\"submit\" value=\"submit\">"
-					+
-					//use hidden inputs to pass the new beer and new bar keys as well as requiresUpdate flags to the update page.
-					"<input type=\"hidden\" name=\"bar\" value=\""
-					+ newBar
-					+ "\"/>"
-					+ "<input type=\"hidden\" name=\"beer\" value=\""
-					+ newBeer
-					+ "\"/>"
-					+ "<input type=\"hidden\" name=\"ubar\" value=\""
-					+ Integer.toString(updateBar)
-					+ "\"/>"
-					+ "<input type=\"hidden\" name=\"ubeer\" value=\""
-					+ Integer.toString(updateBeer) + "\"/>" + "</form>");
+						//Create a SQL statement
+						Statement stmt = con.createStatement();
+						Statement stmt4 = con2.createStatement();
+
+						//Populate SQL statement with an actual query. It returns a single number. The number of beers in the DB.
+						String str = "SELECT * FROM beers";
+						boolean status = false;
+						//Run the query against the DB
+						try{
+							ResultSet result = stmt.executeQuery(str);
+						
+						//Start parsing out the result of the query. Don't forget this statement. It opens up the result set.
+						while(result.next()){
+							if(result.getString("name").compareTo(beer) == 0){
+								status = true;
+							}
+						}
+						
+						result.close();
+						} catch(SQLException e){
+							out.print(e.getMessage() + "fail 4");
+						}
+						if(status == true){
+							ResultSet result2 = stmt4.executeQuery("SELECT beer FROM sells WHERE bar = '" + bar + "';");
+							boolean status2 = false;
+							while(result2.next()){
+								if(result2.getString("beer").compareTo(beer) == 0){
+									status2 = true;
+								}
+							}
+							result2.close();
+							if(status2 == true){
+								out.print("<center><h2>" + bar + " already sells " + beer +"</h2></center>");
+							} else if(status2 == false){
+								try{
+									PreparedStatement stmt1 = con2.prepareStatement("INSERT INTO sells VALUES (?, ?, ?)");
+									stmt1.setString(1, bar);
+									stmt1.setString(2, beer);
+									stmt1.setDouble(3, baseprice);
+									stmt1.executeUpdate();
+									out.print("<center><h2>You now sell " + beer + "</h2></center>");
+								} catch(SQLException e){
+									out.print(e.getMessage() + " fail 1");
+								}								
+							}	
+						}else if(status == false){
+							try{
+								PreparedStatement stmt3 = con2.prepareStatement("INSERT INTO beers VALUES (?)");
+								stmt3.setString(1, beer);
+								stmt3.executeUpdate();
+								
+								PreparedStatement stmt2 = con2.prepareStatement("INSERT INTO sells VALUES (?, ?, ?)");
+								stmt2.setString(1, bar);
+								stmt2.setString(2, beer);
+								stmt2.setDouble(3, baseprice);
+								stmt2.executeUpdate();
+								
+								out.print("<center><h2>" + beer + " is a new beer.<br></h2></center>");
+								out.print("<center><h2>You now sell " + beer + "</h2></center>");
+	
+							}catch(SQLException e){
+								out.print(e.getMessage()+ " fail 2");
+							}
+							
+						}
+						
+					}catch(SQLException e){
+						out.print(e.getMessage() + " fail 3");
+					}
+					
+				}				
+			}catch(Exception e){
+				out.print("<center><h2>Price need to be a number.</h2></center>");
+			}
+				
 		}
-
-		out.print("insert succeeded");
-	} catch (Exception ex) {
-		out.print(ex);
-		out.print("insert failed");
-	}
+	
 %>
 </body>
 </html>

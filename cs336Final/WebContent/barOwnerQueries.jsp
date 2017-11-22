@@ -57,7 +57,7 @@
 	
 	<div class="Queries">
 		<a onclick="showQueries()" class="butt" id="showOptions">Run Queries</a>
-		<a href="ownerUpdates.jsp" class="butt">Update your bar</a>
+		<a href="barOwnerUpdates.jsp" class="butt">Update your bar</a>
 		
 		<div id="options" style="display:none">
 			<p> Number of people that have visited your bar by season: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"> </p>
