@@ -16,6 +16,7 @@
 				<div id="linkContainer">
 					<a id="drinker" href="drinkerPage.jsp">I am a Drinker</a>
 					<a id="owner" href="barOwnerHome.jsp">I am a Bar Owner</a>
+					<br><br><center><a id="verification" href="Verify.jsp">Verify our Pattern</a></center>
 				</div>
 			</div>
 		</div>		

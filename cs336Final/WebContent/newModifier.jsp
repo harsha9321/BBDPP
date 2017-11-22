@@ -29,10 +29,12 @@
 				Connection con2 = db.getConnection();
 
 				//Create a SQL statement
-				PreparedStatement stmt = con.prepareStatement("UPDATE sesonalModifer SET modifer = TRUNCATE(?, 2) WHERE bar = ? AND season ?;");
+				PreparedStatement stmt = con.prepareStatement("UPDATE seasonalModifer SET modifer = TRUNCATE(?, 2) WHERE bar = ? AND season = ?;");
 				stmt.setDouble(1, modifier);
 				stmt.setString(2, bar);
 				stmt.setString(3, season);
+				stmt.executeUpdate();
+				stmt.close();
 				//Run the query against the database.
 				
 				PreparedStatement stmt2 = con.prepareStatement("UPDATE seasonalprices JOIN sells set seasonalPrice = TRUNCATE((baseprice * ?), 2) " +
@@ -41,6 +43,7 @@
 				stmt2.setString(2, bar);
 				stmt2.setString(3, season);
 				stmt2.executeUpdate();
+				stmt2.close();
 				
 				PreparedStatement stmt3 = con2.prepareStatement("SELECT * FROM seasonalprices WHERE bar = ? AND season = ?;");
 				stmt3.setString(1, bar);
@@ -58,8 +61,6 @@
 				 out.print("</table>");
 				//close the connection.
 				result.close();
-				stmt.close();
-				stmt2.close();
 				stmt3.close();
 				con.close();
 				con2.close();
