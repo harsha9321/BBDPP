@@ -36,10 +36,17 @@
 						ApplicationDB db = new ApplicationDB();	
 						Connection con = db.getConnection();
 						Connection con2 = db.getConnection();
+						Connection con3 = db.getConnection();
 
 						//Create a SQL statement
 						Statement stmt = con.createStatement();
 						Statement stmt4 = con2.createStatement();
+						
+						String[] seasons = new String[4];
+						seasons[0] = "fall";
+						seasons[1] = "spring";
+						seasons[2] = "summer";
+						seasons[3] = "winter";
 
 						//Populate SQL statement with an actual query. It returns a single number. The number of beers in the DB.
 						String str = "SELECT * FROM beers";
@@ -56,6 +63,7 @@
 						}
 						
 						result.close();
+						stmt.close();
 						} catch(SQLException e){
 							out.print(e.getMessage() + "fail 4");
 						}
@@ -78,6 +86,19 @@
 									stmt1.setDouble(3, baseprice);
 									stmt1.executeUpdate();
 									out.print("<center><h2>You now sell " + beer + "</h2></center>");
+									for(int i = 0; i < seasons.length; i++){
+									PreparedStatement stmt5 = con3.prepareStatement("INSERT INTO seasonalprices VALUES (?, ?, ?, TRUNCATE((SELECT (? * modifer) FROM seasonalModifer WHERE bar = ? AND season = ?), 2)); ");
+									stmt5.setString(1, bar);
+									stmt5.setString(2, beer);
+									stmt5.setString(3, seasons[i]);
+									stmt5.setDouble(4, baseprice);
+									stmt5.setString(5, bar);
+									stmt5.setString(6, seasons[i]);
+									stmt5.executeUpdate();
+									stmt5.close();
+									}
+									stmt1.close();
+									
 								} catch(SQLException e){
 									out.print(e.getMessage() + " fail 1");
 								}								
@@ -94,14 +115,32 @@
 								stmt2.setDouble(3, baseprice);
 								stmt2.executeUpdate();
 								
+								for(int i = 0; i < seasons.length; i++){
+									PreparedStatement stmt6 = con3.prepareStatement("INSERT INTO seasonalprices VALUES (?, ?, ?, TRUNCATE((SELECT (? * modifer) FROM seasonalModifer WHERE bar = ? AND season = ?), 2)); ");
+									stmt6.setString(1, bar);
+									stmt6.setString(2, beer);
+									stmt6.setString(3, seasons[i]);
+									stmt6.setDouble(4, baseprice);
+									stmt6.setString(5, bar);
+									stmt6.setString(6, seasons[i]);
+									stmt6.executeUpdate();
+									stmt6.close();
+									}
+								
 								out.print("<center><h2>" + beer + " is a new beer.<br></h2></center>");
 								out.print("<center><h2>You now sell " + beer + "</h2></center>");
+								
+								stmt3.close();
+								stmt2.close();
 	
 							}catch(SQLException e){
 								out.print(e.getMessage()+ " fail 2");
 							}
 							
 						}
+						con.close();
+						con2.close();
+						con3.close();
 						
 					}catch(SQLException e){
 						out.print(e.getMessage() + " fail 3");
