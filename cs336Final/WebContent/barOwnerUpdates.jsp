@@ -25,7 +25,6 @@
 	
 </head>
 <body>
-
 	<center>
 		Add a new beer to sell: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q1button"><br>
 		Add a seasonal modifier to prices: <input type="radio" onclick="javascript:showQueries();" name="q1button" id="q2button"><br>

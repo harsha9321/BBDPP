@@ -13,6 +13,10 @@
 </head>
 <body>
 
+	<a id="home" href="main.jsp">HOME</a>
+
+	<div>.</div>
+
 	<%
 		String bar = (String)session.getAttribute("bar");
 		String beer = request.getParameter("beer");
