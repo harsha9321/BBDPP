@@ -6,8 +6,20 @@
 }
 
 body {
-	padding-top: 15%;
 	background-image: url("Images/Obama.jpg");
+}
+
+#home {
+	text-decoration: none;
+	color: #fef092;
+	background-color:gray;
+	opacity: .95;
+	padding: 5px;
+	margin-bottom: 15%;
+}
+
+.wrap {
+	margin-top: 15%;
 }
 
 a {

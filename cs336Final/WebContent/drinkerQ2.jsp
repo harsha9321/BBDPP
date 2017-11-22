@@ -11,6 +11,8 @@
 	<link href="CSS/drinkerQ2.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<a id="home" href="main.jsp">HOME</a>
+
 	<%
 			//List<String> list = new ArrayList<String>();
 	
@@ -31,14 +33,14 @@
 				//Run the query against the database.
 				stmt.executeUpdate();
 				
-				out.print("<center><h2><a href='drinkerQueries.jsp'>Your visit has been logged, thank you for your input</a></h2></center>");
+				out.print("<center><h2 class='wrap'><a href='drinkerQueries.jsp'>Your visit has been logged, thank you for your input</a></h2></center>");
 
 				//close the connection.
 				con.close();
 	
 			} catch (SQLException e) {
 				out.print(e.getMessage());
-				out.print("<center><p><a href='drinkerQueries.jsp'> There was an internal error with the data base try again</a></p></center>");
+				out.print("<center><p class='wrap'><a href='drinkerQueries.jsp'> There was an internal error with the data base try again</a></p></center>");
 			}
 			%>
 
