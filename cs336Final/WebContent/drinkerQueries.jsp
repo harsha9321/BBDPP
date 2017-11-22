@@ -146,6 +146,7 @@ function showQueries() {
 				ResultSet result = stmt.executeQuery(str);
 				
 				out.print("Season that I visited the bar: <select name =\"drinker\" size=1");
+				out.print("<option value=\"fall\">fall</option>");
 				 while(result.next()){
 					 out.print("<option value=\"" + result.getString("name") + "\">" + result.getString("name") + "</option>");		
 				}
