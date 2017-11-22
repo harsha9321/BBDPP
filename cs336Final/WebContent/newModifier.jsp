@@ -7,8 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Modifier Result</title>
+
+<link href="CSS/newModifier.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<div><a id="home" href="main.jsp">HOME</a></div>
+
 	<%
 		try{
 			double modifier = Double.parseDouble(request.getParameter("modifier"));
