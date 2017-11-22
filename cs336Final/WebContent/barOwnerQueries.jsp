@@ -41,16 +41,18 @@
 	<link href="CSS/barOwnerQueries.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	
 	<% 
 		String barname = request.getParameter("bar");
 		if(barname != null){
 			session.setAttribute("bar",barname);
 		}
-		out.print("<center><h1>" + session.getAttribute("bar") + "</h1></center>");
+		out.print("<center><h1 class='Queries'>" + session.getAttribute("bar") + "</h1></center>");
 	%>
 	<center>
 	
-	<h3>What would you like to see:</h3><br>
+	<h3 class="Queries">What would you like to see:</h3><br>
+	
 	<div class="Queries">
 		<a onclick="showQueries()" class="butt" id="showOptions">Run Queries</a>
 		<a href="ownerUpdates.jsp" class="butt">Update your bar</a>
