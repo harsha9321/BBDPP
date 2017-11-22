@@ -24,6 +24,7 @@ div#wrapper {
 	margin-right: 6%;
 	padding-top: 2%;
 	padding-bottom: 4%;
+	padding-left: 1%;
 }
 
 div#main {
@@ -55,9 +56,13 @@ a:hover {
 }
 
 a#drinker {
-	margin-right: 12%;
+	margin-right: 20%;
 }
 
 a#owner {
-	margin-left: 15%;
+	
+}
+
+a#verification {
+	margin-right: 2.8%;
 }
