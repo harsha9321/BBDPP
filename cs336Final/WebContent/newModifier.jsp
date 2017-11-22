@@ -53,6 +53,10 @@
 				 }
 				 out.print("</table>");
 				//close the connection.
+				result.close();
+				stmt.close();
+				stmt2.close();
+				stmt3.close();
 				con.close();
 				con2.close();
 				} catch(SQLException e){

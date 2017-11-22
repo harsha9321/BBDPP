@@ -50,6 +50,7 @@
 									break;
 								}
 							}
+							result.close();
 							if(validName == false){
 								out.print("<center><p><a href='drinkerPage.jsp'>Drinker already Exists in the database Duplicate names are not allowed \n Try again</p></a></center>");
 							}
@@ -63,6 +64,7 @@
 								out.print("<center><p>Welcome Drinker, you have been entered to the database.</p><br></center>");
 								Random rand = new Random();
 								out.print("<center><p>Here is your coupon code: " + (rand.nextInt(1000000 + 1) + 100000) + "</p></center>");
+								insertStament.close();
 							}
 						}
 						
@@ -73,6 +75,8 @@
 					}
 					
 					//close the connection.
+					
+					stmt.close();		
 					con.close();
 		
 				} catch (Exception e) {

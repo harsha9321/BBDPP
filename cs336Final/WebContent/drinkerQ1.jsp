@@ -34,6 +34,8 @@
 			 }
 			 out.print("</table>");
 			//close the connection.
+			result.close();
+			stmt.close();
 			con.close();
 			
 		}catch(Exception e){

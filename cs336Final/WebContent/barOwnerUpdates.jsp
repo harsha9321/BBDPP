@@ -60,6 +60,8 @@
 				}
 				out.print("</select><br>");
 				//close the connection.
+				result.close();
+				stmt.close();
 				con.close();
 	
 			} catch (SQLException e) {

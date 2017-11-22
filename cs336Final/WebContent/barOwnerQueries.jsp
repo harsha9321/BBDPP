@@ -87,10 +87,12 @@
 				 }
 				 out.print("</table>");
 			//close the connection.
+				result.close();
+				stmt.close();
 				con.close();
 	
-			} catch (Exception e) {
-				System.out.println(e.getStackTrace() + "hello");
+			} catch (SQLException e) {
+				System.out.println(e.getMessage() + "hello");
 			}
 			%>
 	</div>
@@ -124,6 +126,8 @@
 				 }
 				 out.print("</table>");
 			//close the connection.
+				result.close();
+				stmt2.close();
 				con.close();
 	
 			} catch (SQLException e) {
@@ -161,6 +165,8 @@
 				 }
 				 out.print("</table>");
 			//close the connection.
+				result.close();
+				stmt3.close();
 				con.close();
 	
 			} catch (SQLException e) {

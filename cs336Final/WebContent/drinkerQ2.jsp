@@ -36,6 +36,7 @@
 				out.print("<center><h2 class='wrap'><a href='drinkerQueries.jsp'>Your visit has been logged, thank you for your input</a></h2></center>");
 
 				//close the connection.
+				stmt.close();
 				con.close();
 	
 			} catch (SQLException e) {

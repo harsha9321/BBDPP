@@ -22,7 +22,6 @@
 		else{
 			try{
 				double baseprice = Double.parseDouble(request.getParameter("price"));
-				baseprice = Math.floor(baseprice * 100) / 100;
 				
 				if(baseprice < 0){
 					out.print("<center><h2>Price need to be greater then 0</h2></center>");
@@ -69,7 +68,7 @@
 								out.print("<center><h2>" + bar + " already sells " + beer +"</h2></center>");
 							} else if(status2 == false){
 								try{
-									PreparedStatement stmt1 = con2.prepareStatement("INSERT INTO sells VALUES (?, ?, ?)");
+									PreparedStatement stmt1 = con2.prepareStatement("INSERT INTO sells VALUES (?, ?, TRUNCATE(?, 2))");
 									stmt1.setString(1, bar);
 									stmt1.setString(2, beer);
 									stmt1.setDouble(3, baseprice);
@@ -85,7 +84,7 @@
 								stmt3.setString(1, beer);
 								stmt3.executeUpdate();
 								
-								PreparedStatement stmt2 = con2.prepareStatement("INSERT INTO sells VALUES (?, ?, ?)");
+								PreparedStatement stmt2 = con2.prepareStatement("INSERT INTO sells VALUES (?, ?, TRUNCATE(?, 2))");
 								stmt2.setString(1, bar);
 								stmt2.setString(2, beer);
 								stmt2.setDouble(3, baseprice);

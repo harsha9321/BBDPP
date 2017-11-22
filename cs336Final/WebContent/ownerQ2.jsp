@@ -36,6 +36,8 @@
 					 }
 					 out.print("</table></center>");
 				//close the connection.
+					result.close();
+					stmt2.close();
 					con.close();
 				}catch(SQLException e){
 					out.print(e.getMessage());

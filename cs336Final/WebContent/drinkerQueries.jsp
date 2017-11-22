@@ -59,6 +59,8 @@
 				}
 				out.print("</select><br>");
 				//close the connection.
+				result.close();
+				stmt.close();
 				con.close();
 	
 			} catch (SQLException e) {
@@ -105,6 +107,8 @@
 				}
 				out.print("</select><sub><i>&nbsp&nbspIf you dont see your name go back and join our database</i></sub><br>");
 				//close the connection.
+				result.close();
+				stmt.close();
 				con.close();
 	
 			} catch (SQLException e) {
@@ -132,6 +136,8 @@
 				}
 				out.print("</select><sub><i>&nbsp&nbspIf you dont see your bar, that means it is not a part of our database</i></sub><br>");
 				//close the connection.
+				result.close();
+				stmt.close();
 				con.close();
 	
 			} catch (SQLException e) {
@@ -160,6 +166,8 @@
 				}
 				out.print("</select><sub><i>&nbsp&nbspIf you dont see the season that you visited, you are on the wrong planet.</i></sub><br>");
 				//close the connection.
+				result.close();
+				stmt.close();
 				con.close();
 	
 			} catch (SQLException e) {
