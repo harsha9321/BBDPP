@@ -9,7 +9,13 @@
 	<title>Visit Logged</title>
 	
 	<link href="CSS/drinkerQ2.css" rel="stylesheet" type="text/css">
+	<script>
+		function goBack() {
+		    window.history.back();
+		}
+	</script>
 </head>
+
 <body>
 	<a id="home" href="main.jsp">HOME</a>
 
@@ -33,7 +39,7 @@
 				//Run the query against the database.
 				stmt.executeUpdate();
 				
-				out.print("<center><h2 class='wrap'><a href='drinkerQueries.jsp'>Your visit has been logged, thank you for your input</a></h2></center>");
+				out.print("<center><h2 class='wrap'><a onclick=\"goBack()\" style=\"cursor:pointer\">Your visit has been logged, thank you for your input</a></h2></center>");
 
 				//close the connection.
 				stmt.close();
@@ -41,7 +47,7 @@
 	
 			} catch (SQLException e) {
 				out.print(e.getMessage());
-				out.print("<center><p class='wrap'><a href='drinkerQueries.jsp'> There was an internal error with the data base try again</a></p></center>");
+				out.print("<center><p class='wrap'><a onclick=\"goBack()\"> There was an internal error with the data base try again</a></p></center>");
 			}
 			%>
 

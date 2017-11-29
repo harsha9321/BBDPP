@@ -56,7 +56,7 @@
 	<h3 class="Queries">What would you like to see:</h3><br>
 	
 	<div class="Queries">
-		<a onclick="showQueries()" class="butt" id="showOptions">Run Queries</a>
+		<a onclick="showQueries()" class="butt" id="showOptions" style="cursor:pointer">Run Queries</a>
 		<a href="barOwnerUpdates.jsp" class="butt">Update your bar</a>
 		
 		<div id="options" style="display:none">

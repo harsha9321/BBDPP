@@ -52,5 +52,18 @@
 			</form>
 		</center>
 	</div>
+	
+	<div id="wrapper">
+		<center>
+		<p>If you didn't find your bar in the menu above, Join our database.</p>
+		
+		<form method="post" action="newBar.jsp">
+			New Bar: <input type="text" name="bar"><br>
+			<input class="butt" type="submit" value="submit">
+		
+		
+		</form>
+		</center>
+	</div>
 </body>
 </html>

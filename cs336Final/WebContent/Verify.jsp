@@ -17,7 +17,7 @@
 			This page is to verify our pattern, our pattern is that the seasonal price from the seasonalPrices 
 			table is the product of the seasonal modifier and the base price of the beer at that bar, the query we used to verify this is: <br><br>
 			SELECT * from seasonalModifer WHERE modifer NOT IN (SELECT ROUND(TRUNCATE((seasonalPrice / basePrice), 2), 1) as modifer
-			FROM seasonalprices, sells WHERE seasonalprices.bar = sells.bar AND seasonalprices.beer = sells.beer group by sells.bar, seasonalprices.season); </p><br>
+			FROM seasonalprices, sells WHERE seasonalprices.bar = sells.bar AND seasonalprices.beer = sells.beer group by sells.bar, seasonalprices.season);<br>
 			
 			<h4>If a table containing tuples appears then our Pattern failed.</h4>
 		</center>
